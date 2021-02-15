@@ -1,6 +1,7 @@
 <?php
     
     require_once __DIR__.'/Request.php';
+    require_once __DIR__.'/Response.php';
 
     final class Router {
         private $routes = array();
@@ -20,7 +21,7 @@
         }
 
         public function add(string $method, string $path, callable $handler): void {
-            if(!substr($path, -1) === '/') {
+            if(!(substr($path, -1) == '/')) {
                 $path .= '/';
             }
 
@@ -33,6 +34,7 @@
 
         public function listen(callable $error_callback): void {
             $req = new Request($_SERVER);
+            $res = new Response();
 
             if(!(substr($req->path, -1) == '/')) {
                 $req->path .= '/';
@@ -40,7 +42,7 @@
 
             try {
                 $route = $this->get_route($req->method, $req->path);
-                $route['handler']($req);
+                $route['handler']($req, $res);
 
             } catch(Exception $e) {
                 $error_callback($e->getMessage());
