@@ -22,7 +22,7 @@
         public function __construct(array $INFO) {
             $explode_path = explode('?', $INFO['REQUEST_URI']);
             $this->query_string = count($explode_path) > 1 
-                ? $this->format_query_string(explode('?', $INFO['REQUEST_URI'])[1]) : ""; 
+                ? $this->format_query_string(explode('?', $INFO['REQUEST_URI'])[1]) : array(); 
                 
             $this->path = explode('?', $INFO['REQUEST_URI'])[0];
             $this->method = $_SERVER['REQUEST_METHOD'];
