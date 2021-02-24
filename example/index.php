@@ -7,13 +7,21 @@
     // add new GET route with the path "/routing _with_php/example/"
     // http://localhost/routing_with_php/example/
     $router->add('GET', '/routing_with_php/example/', function(Request $req, Response $res) {
-        $res->send_file(PAGES_PATH.'/home.html', 200);
+        $res->render(PAGES_PATH.'/home.html', 200);
     });
 
     // add new POST route with the path "/routing _with_php/example/"
     // http://localhost/routing_with_php/example/
     $router->add('POST', '/routing_with_php/example/houses', function(Request $req, Response $res) {
-        $res->send_file(PAGES_PATH.'/houses.html', 200);
+        $res->render(PAGES_PATH.'/houses.html', 200);
+    });
+
+    // it is possible to pass date to page
+    $router->add('GET', '/routing_with_php/example/parsedata', function(Request $req, Response $res) {
+        $res->render(PAGES_PATH.'/parseData.php', 200, array(
+            'title' => "Any title",
+            'page' => 'parse data exemple'
+        ));
     });
 
     // crucial method for the operation of routing.

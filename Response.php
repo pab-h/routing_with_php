@@ -9,7 +9,7 @@
             echo json_encode($json);
         }
 
-        public function send_file(string $path, int $code = 200) {
+        public function render(string $path, int $code = 200, array $data = array()) {
             $this->status($code);
             require_once $path;
         }
