@@ -16,6 +16,6 @@
         $res->send_file(PAGES_PATH.'/houses.html', 200);
     });
 
+    // crucial method for the operation of routing.
     $router->listen('header');
-
 ?>
