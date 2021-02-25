@@ -45,7 +45,7 @@
                 $route['handler']($req, $res);
 
             } catch(Exception $e) {
-                $error_callback($e->getMessage());
+                $error_callback($e->getMessage(), $req, $res);
             }
         }
 
