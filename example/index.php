@@ -20,8 +20,7 @@
     $router->add('GET', '/routing_with_php/example/middleware', 
         function(Request $req, Response $res){
             if(!array_key_exists('access-token', $req->headers)) {
-                $res->redirect('.');
-                $res->stop();
+                $res->stop('.');
             }  
         },
         function(Request $req, Response $res){

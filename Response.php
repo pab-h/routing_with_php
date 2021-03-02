@@ -19,6 +19,9 @@
         } 
 
         public function stop(string $redirect = NULL): void {
+            if(!is_null($redirect)) {
+                $this->redirect($redirect);
+            }
             exit;
         }
 
