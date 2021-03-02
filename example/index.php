@@ -16,6 +16,19 @@
         $res->render(PAGES_PATH.'/houses.html', 200);
     });
 
+    // middleware exemple
+    $router->add('GET', '/routing_with_php/example/middleware', 
+        function(Request $req, Response $res){
+            if(!array_key_exists('access-token', $req->headers)) {
+                $res->redirect('.');
+                $res->stop();
+            }  
+        },
+        function(Request $req, Response $res){
+            $res->render(PAGES_PATH.'/needTokenToAccess.html', 200);
+        }
+    );
+
     // it is possible to pass date to page
     $router->add('GET', '/routing_with_php/example/parsedata', function(Request $req, Response $res) {
         $res->render(PAGES_PATH.'/parseData.php', 200, array(

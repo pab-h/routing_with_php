@@ -1,5 +1,4 @@
 <?php
-    
     require_once __DIR__.'/Request.php';
     require_once __DIR__.'/Response.php';
 
@@ -20,7 +19,7 @@
             throw new Exception('HTTP/1.0 404 Not Found', 404);
         }
 
-        public function add(string $method, string $path, callable $handler): void {
+        public function add(string $method, string $path, callable ...$triggers): void {
             if(!(substr($path, -1) == '/')) {
                 $path .= '/';
             }
@@ -28,7 +27,7 @@
             array_push($this->routes, array (
                 'method' => strtoupper($method),
                 'path' => $path,
-                'handler' => $handler
+                'triggers' => $triggers
             ));
         }
 
@@ -42,8 +41,10 @@
 
             try {
                 $route = $this->get_route($req->method, $req->path);
-                $route['handler']($req, $res);
 
+                foreach($route['triggers'] as $trigger) {
+                    $trigger($req, $res);
+                }
             } catch(Exception $e) {
                 $error_callback($e->getMessage(), $req, $res);
             }
