@@ -25,5 +25,9 @@
     });
 
     // crucial method for the operation of routing.
-    $router->listen('header');
+    $router->listen(function(string $error, Request $req, Response $res) {
+        $res->send(array(
+            'error' => $error
+        ), 404);
+    });
 ?>
