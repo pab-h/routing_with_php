@@ -13,7 +13,7 @@
             $query_string = array();
             foreach(explode('&', $query_string_raw) as $query) {
                 $explode_query = explode('=', $query);
-                $query_string[$explode_query[0]] = isset($explode_query[1])? $explode_query[1] : "";
+                $query_string[$explode_query[0]] = isset($explode_query[1])? urldecode($explode_query[1]) : "";
                 
             }
             return $query_string;
