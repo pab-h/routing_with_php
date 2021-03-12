@@ -3,7 +3,7 @@
         public string $path; 
         public string $method;
         public string $ip; 
-        public object $body;
+        public $body;
         public array $query_string;
         public array $post;
         public array $files;
