@@ -28,8 +28,7 @@
             $this->method = $_SERVER['REQUEST_METHOD'];
             $this->ip = $_SERVER['REMOTE_ADDR'];
             $this->headers = apache_request_headers();
-            $body = json_decode(file_get_contents('php://input'));
-            $this->body = is_null($body)? new class{}: $body;
+            $this->body = json_decode(file_get_contents('php://input'));
             $this->post = $_POST;
             $this->files = $_FILES;
         }
