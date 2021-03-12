@@ -3,7 +3,7 @@
         public string $path; 
         public string $method;
         public string $ip; 
-        public string $body;
+        public object $body;
         public array $query_string;
         public array $post;
         public array $files;
@@ -28,7 +28,8 @@
             $this->method = $_SERVER['REQUEST_METHOD'];
             $this->ip = $_SERVER['REMOTE_ADDR'];
             $this->headers = apache_request_headers();
-            $this->body = file_get_contents('php://input');
+            $body = json_decode(file_get_contents('php://input'));
+            $this->body = is_null($body)? new class{}: $body;
             $this->post = $_POST;
             $this->files = $_FILES;
         }
